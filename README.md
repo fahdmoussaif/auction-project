@@ -4,16 +4,21 @@
 
 CREATE DATABASE auction_db;
 ### 2. Run Backend
-Bash
+
 
 cd backend
-./mvnw spring-boot:run
+./mvnw 
+spring-boot:run
+
+
 Server runs at: http://localhost:8080
 
-3. Run Frontend
-Bash
+### 3. Run Frontend
+
 
 cd frontend
 npm install
 npm run dev
+
+
 App runs at: http://localhost:5173
