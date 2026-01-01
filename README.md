@@ -1,9 +1,9 @@
 # Auction App
 
 ### 1. Database Setup
-```sql
+
 CREATE DATABASE auction_db;
-2. Run Backend
+### 2. Run Backend
 Bash
 
 cd backend
