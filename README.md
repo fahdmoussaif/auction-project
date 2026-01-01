@@ -1,10 +1,7 @@
 # Auction App
 
-### 1. Database Setup
-```sql
-CREATE DATABASE auction_db;
-```
-### 2. Run Backend
+
+### 1. Run Backend
 
 ```bash
 cd backend
@@ -13,7 +10,7 @@ cd backend
 
 Server runs at: http://localhost:8080
 
-### 3. Run Frontend
+### 2. Run Frontend
 
 ```bash
 cd frontend
