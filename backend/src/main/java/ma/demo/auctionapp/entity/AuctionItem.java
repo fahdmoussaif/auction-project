@@ -2,11 +2,13 @@ package ma.demo.auctionapp.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -30,4 +32,15 @@ public class AuctionItem {
     @OneToMany(mappedBy = "item")
     @JsonIgnore // Prevent recursion
     private List<Bid> bids;
+
+    @JsonProperty("highestBidderName")
+    public String getHighestBidderName() {
+        if (bids == null || bids.isEmpty()) {
+            return "No bids yet";
+        }
+        return bids.stream()
+                .max(Comparator.comparing(Bid::getAmount))
+                .map(bid -> bid.getBidder().getUsername())
+                .orElse("No bids yet");
+    }
 }

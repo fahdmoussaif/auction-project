@@ -43,22 +43,34 @@ const UserProfile = ({ currentUser, onBack }) => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-                {/* COLUMN 1: ITEMS I AM SELLING */}
-                <div className="bg-white rounded-xl shadow p-6">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">📦 Items I'm Selling ({myItems.length})</h2>
-                    <div className="space-y-4">
-                        {myItems.length === 0 && <p className="text-gray-500 italic">You haven't listed any items.</p>}
-                        {myItems.map(item => (
-                            <div key={item.id} className="flex gap-4 p-3 border rounded-lg hover:bg-gray-50">
-                                <img src={item.imageUrl || "https://via.placeholder.com/50"} className="w-16 h-16 object-cover rounded bg-gray-200" alt="" onError={(e)=>e.target.style.display='none'}/>
-                                <div>
-                                    <h3 className="font-bold">{item.title}</h3>
-                                    <p className="text-sm text-gray-600">Current Price: <span className="text-green-600 font-bold">{formatCurrency(item.currentBid || item.startingPrice)}</span></p>
-                                    <p className="text-xs text-gray-400">Ends: {new Date(item.endTime).toLocaleDateString()}</p>
-                                </div>
+                {/* ... inside COLUMN 1 ... */}
+
+                <div className="space-y-4">
+                    {myItems.length === 0 && <p className="text-gray-500 italic">You haven't listed any items.</p>}
+                    {myItems.map(item => (
+                        <div key={item.id} className="flex gap-4 p-3 border rounded-lg hover:bg-gray-50">
+                            <img
+                                src={item.imageUrl || "https://via.placeholder.com/50"}
+                                className="w-16 h-16 object-cover rounded bg-gray-200"
+                                alt=""
+                                onError={(e)=>e.target.style.display='none'}
+                            />
+                            <div>
+                                <h3 className="font-bold">{item.title}</h3>
+                                <p className="text-sm text-gray-600">
+                                    Current Price: <span className="text-green-600 font-bold">{formatCurrency(item.currentBid || item.startingPrice)}</span>
+                                </p>
+
+                                {/* --- NEW CODE STARTS HERE --- */}
+                                <p className="text-sm text-blue-600 font-semibold mt-1">
+                                    🏆 Top Bidder: {item.highestBidderName || "No bids yet"}
+                                </p>
+                                {/* --- NEW CODE ENDS HERE --- */}
+
+                                <p className="text-xs text-gray-400 mt-1">Ends: {new Date(item.endTime).toLocaleDateString()}</p>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
 
                 {/* COLUMN 2: MY BIDS */}
