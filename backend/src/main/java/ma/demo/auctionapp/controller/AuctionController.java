@@ -94,6 +94,10 @@ public class AuctionController {
 
         return ResponseEntity.ok(itemRepo.save(item));
     }
+    @GetMapping("/{id}/bids")
+    public ResponseEntity<List<Bid>> getItemBids(@PathVariable Long id) {
+        return ResponseEntity.ok(bidRepo.findByItemId(id));
+    }
 }
 
 // Simple DTO for the request body

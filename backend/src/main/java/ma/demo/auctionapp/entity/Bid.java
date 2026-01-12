@@ -1,6 +1,7 @@
 package ma.demo.auctionapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,4 +32,9 @@ public class Bid {
     @JoinColumn(name = "item_id")
     @JsonIgnoreProperties("bids") // Stop recursion: Don't load the Item's bid list again
     private AuctionItem item;
+
+    @JsonProperty("bidderName")
+    public String getBidderName() {
+        return bidder != null ? bidder.getUsername() : "Unknown";
+    }
 }

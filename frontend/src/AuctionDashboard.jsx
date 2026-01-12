@@ -199,7 +199,9 @@ const AuctionDashboard = ({ currentUser, onLogout, onGoToProfile }) => {
                                 <div className="mt-auto pt-4">
                                     <div className="flex justify-between items-end mb-4">
                                         <div className="text-sm text-gray-500">
-                                            <p>Seller: {item.owner?.username || 'Unknown'}</p>
+                                            {/* FIXED LINE BELOW */}
+                                            <p>Seller: <span className="font-semibold text-gray-700">{item.ownerName || 'Unknown'}</span></p>
+
                                             <button onClick={() => viewHistory(item.id, item.title)} className="text-blue-500 text-xs hover:underline mt-1">
                                                 View Bid History
                                             </button>

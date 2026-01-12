@@ -43,4 +43,11 @@ public class AuctionItem {
                 .map(bid -> bid.getBidder().getUsername())
                 .orElse("No bids yet");
     }
+    @JsonProperty("ownerName")
+    public String getOwnerName() {
+        if (owner == null) {
+            return "Unknown";
+        }
+        return owner.getUsername();
+    }
 }
