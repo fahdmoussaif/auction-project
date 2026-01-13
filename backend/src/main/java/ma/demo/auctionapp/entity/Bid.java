@@ -24,13 +24,13 @@ public class Bid {
     private LocalDateTime timestamp;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") // DB column is user_id
-    @JsonIgnoreProperties({"bids", "password"}) // Stop recursion: Don't load the User's bids or password
-    private User bidder; // Field name MUST be 'bidder' to match 'findByBidderId'
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"bids", "password"})
+    private User bidder;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    @JsonIgnoreProperties("bids") // Stop recursion: Don't load the Item's bid list again
+    @JsonIgnoreProperties("bids")
     private AuctionItem item;
 
     @JsonProperty("bidderName")

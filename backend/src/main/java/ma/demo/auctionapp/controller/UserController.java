@@ -23,8 +23,8 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepo;
-    private final AuctionItemRepository itemRepo; // <--- MAKE SURE THIS IS HERE
-    private final BidRepository bidRepo;          // <--- MAKE SURE THIS IS HERE
+    private final AuctionItemRepository itemRepo;
+    private final BidRepository bidRepo;
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody UserRequest request) {
@@ -46,7 +46,6 @@ public class UserController {
         return ResponseEntity.status(401).build();
     }
 
-    // --- THESE ARE THE NEW METHODS YOU LIKELY MISS ---
 
     @GetMapping("/{id}/items")
     public ResponseEntity<List<AuctionItem>> getUserItems(@PathVariable Long id) {

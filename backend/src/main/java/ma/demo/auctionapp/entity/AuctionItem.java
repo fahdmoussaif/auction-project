@@ -20,17 +20,17 @@ public class AuctionItem {
     private Long id;
     private String title;
     private BigDecimal startingPrice;
-    private BigDecimal currentBid; // Cache highest bid for easy access
+    private BigDecimal currentBid;
     private LocalDateTime endTime;
     private String imageUrl;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    @JsonIgnore // Prevent recursion
+    @JsonIgnore
     private User owner;
 
     @OneToMany(mappedBy = "item")
-    @JsonIgnore // Prevent recursion
+    @JsonIgnore
     private List<Bid> bids;
 
     @JsonProperty("highestBidderName")

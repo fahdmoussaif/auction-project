@@ -23,13 +23,11 @@ public class AuctionController {
     private final BidRepository bidRepo;
     private final UserRepository userRepo;
 
-    // 1. GET all items
     @GetMapping
     public List<AuctionItem> getAllItems() {
         return itemRepo.findAll();
     }
 
-    // 2. GET item by ID
     @GetMapping("/{id}")
     public ResponseEntity<AuctionItem> getItem(@PathVariable Long id) {
         return itemRepo.findById(id)
@@ -37,34 +35,27 @@ public class AuctionController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 3. POST a bid
     @PostMapping("/{itemId}/bid")
     public ResponseEntity<String> placeBid(@PathVariable Long itemId, @RequestBody BidRequest request) {
 
-        // Fetch Item
         AuctionItem item = itemRepo.findById(itemId)
                 .orElse(null);
         if (item == null) return ResponseEntity.badRequest().body("Item not found");
 
-        // Fetch User
         User bidder = userRepo.findById(request.getUserId())
                 .orElse(null);
         if (bidder == null) return ResponseEntity.badRequest().body("User not found");
 
-        // VALIDATION 1: Check time
         if (LocalDateTime.now().isAfter(item.getEndTime())) {
             return ResponseEntity.badRequest().body("Auction has ended");
         }
 
-        // VALIDATION 2: Check amount
-        // If no bids yet, check against starting price. Otherwise check against current highest.
         BigDecimal highestBid = (item.getCurrentBid() == null) ? item.getStartingPrice() : item.getCurrentBid();
 
         if (request.getAmount().compareTo(highestBid) <= 0) {
             return ResponseEntity.badRequest().body("Bid must be higher than " + highestBid);
         }
 
-        // Logic: Create Bid
         Bid newBid = new Bid();
         newBid.setAmount(request.getAmount());
         newBid.setTimestamp(LocalDateTime.now());
@@ -72,7 +63,6 @@ public class AuctionController {
         newBid.setItem(item);
         bidRepo.save(newBid);
 
-        // Logic: Update Item current price
         item.setCurrentBid(request.getAmount());
         itemRepo.save(item);
 
@@ -100,7 +90,6 @@ public class AuctionController {
     }
 }
 
-// Simple DTO for the request body
 @Data
 class BidRequest {
     private Long userId;
