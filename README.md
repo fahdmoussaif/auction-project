@@ -1,7 +1,9 @@
 # Auction App
 
+### 2. Launch MySQL
 
-### 1. Run Backend
+Launch MySQL in PORT: 3306
+### 2. Run Backend
 
 ```bash
 cd backend
@@ -10,7 +12,7 @@ cd backend
 
 Server runs at: http://localhost:8080
 
-### 2. Run Frontend
+### 3. Run Frontend
 
 ```bash
 cd frontend
