@@ -1,6 +1,6 @@
 # Auction App
 
-### 2. Launch MySQL
+### 1. Launch MySQL
 
 Launch MySQL in PORT: 3306
 ### 2. Run Backend
